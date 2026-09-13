@@ -1,0 +1,24 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 52" width="165" height="52">
+	<title>logo (1)-svg</title>
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m0 6h40v40h-40z"/>
+		</clipPath>
+		<image width="41" height="40" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAoCAYAAABjPNNTAAAAAXNSR0IArs4c6QAABYtJREFUWEftmH9o1HUYx1/P5+7m1Kn5K7XcNKclBP6AUaZtXGk/dKlTc+JflWFLBc2aZWE1KCPdRCiDfqFFFjFhzlJIS7SphKFkLBZlav5M8weU08ndvp8nP7eb3m26c3K3DPrAcXD3ve/3dc/zvN/P5/MIbbRKSkrM8PbfDhLjhSYsqDrQmsdKay6+nmu/LAv2CKsdYoSpCiMARXW9im9TfXv2FM7ZWpvovimDLH8nmJFW540C87ii+UCnJjCnQT9DfRWZnc/uyCnaHb4abFIhy8un+nxH/+gn9TJFRJ4CBiaKUiSy8JsILxuf9934eTsOi0Q+u7SSBrlqVTC962ldpaIjUTKBy/cWzqP4gbSGJ+s+4DBIMIbFAw6psKyjTf/ooQWbzjV+lzTIihV3dZcL6aeaR07mBsLe6lDAVAvcGkGEL1C7WcQ8A3wPTIuJW2WalVn5z289nkrIOqAcItG836cMcGquKMs70hxSJmFkNZYPBSlV9EmQqraArAln9RoSOHj8NURebAkSMQXGyCdqdaXxe4NtvdkAprotIPdMKq4avrY09w0HichsQR9QZSJgYtP9r0JaMbOM2teB0VH1xtV+Y02mBHLdklGdrM+4B08GGQH6FejH4bNnqv09MzpFheNU6osR0EpRu17FvAvcnJJIOu9rd+DYQOs394hlmooMBXpHLcY6j1NkAz79QDxqaLCbNQq3CeQJemdB8baaKwknKZFcuzzYXzwdp+gMYFiTCF0OlvIz2NmI2QJUFzxXNbSyLHexq0nrs9lT5m/fn1TILSVB/5kO3hBjKAZ5JKaduR7rUtmlmRfGQ8YLB5sjxoTUYzNCz6Sku/yt3J6BkPka1KW1cf1u1cw04s0AmZ4IMmzCI/1eYLkIRcCvQPfoq6HfRM38utO9YWmwd9jYLQqZiix1pixoDj5zH55ddrF1udTHr/hIOjN3Ec+IXuQyUB0tl/ZJhQRuEmPGW8+6lBcKZq4a+wpKbkuQAhcU3QXilHy7oFPVej9g/NuAPkmFVOhihKetOruhELgAdG3emyP5ixGO/BKuD9yd5r+wUDELUyKcmHTfEQNUK6Kfq0q268eJajK246QWUshSeBtLHxGGtKIm49StwiJRyQJ9DGiX/HQbMyFSk8LEVkD+DewHBgCdr1QeyVR3VzEyUz07FpECVCsxko+SlSDd7hhwEKWL80WBT0FqFF3gxJjsSPa7KJgawL33iNpKCIjYSNyKt6ADona6xTzhfDK1NQnZoDsR6YCSHrZmdMDYxdfgk3E1mVJIlxoPmWBU81tZk20HGfHJRuE4M1cpQuxLKvJwgnSfRtiIkuPMXOGoNBxnL4komcLJBNmCajZCf+BItGM0trur7YKu6PexHyYTcnDCpzVeEC+chD+7ESBPKLJN0KMiHBFPDlr0LwzvNA4LUgVpBU4oHKLh7Ny3BQuqNiLzjmfUbi8q2h0ufzWYEejkvQ9S0GhfyYRMA1kUNqEq+vY9Xli4xltXlpdnYSEwtgVIVHmvvoMpdsOo8jfHdAn4Q27HPjymiLeKyE5VxghSoehikHGg7s/sSnikvbTBaOjdG7XezJ3ywlYnGtaW5i5DZF6zY0STmkwMyVngvFO8wpno0GAvOIHKhmuHhMEgP1pfYPKU+d+4XkxlWd4KhTkJLOgaItmStiTxmCVmq/Y/5NVj+V+O5KqSYHq39uFuovg1LZBm1Rt6ccrV0Sq1iP3JH1Z3dMALmEGCRMZ38R1EzxnLXjXizuZgzTGD3Yfnefh8PosMw2jTSe8Vg6kqJ42RvRIKhy5umOs71wX+jMxo1i0ZlWN95lloOBffQOuk8WxxBHJt6b1BxJQBt9xAgA7lGGHzaARyY+mDHWv953uJjYyMb5ilhvpTHeoO/wPc9fZ3kMT5OwAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre } 
+		.t0 { font-size: 29px;fill: #0e1730;font-weight: 500;font-family: "OpenSans-Medium", "Open Sans" } 
+	</style>
+	<g id="Clip-Path" clip-path="url(#cp1)">
+		<g>
+			<use id="Folder 1" href="#img1" transform="matrix(1,0,0,1,0,2)"/>
+		</g>
+	</g>
+	<text id="" style="transform: matrix(1,0,0,1,486,-94)" >
+	</text>
+	<text id="Boostay" style="transform: matrix(1,0,0,1,46,36)" >
+		<tspan x="0" y="0" class="t0">Boos</tspan><tspan  y="0" class="t0">t</tspan><tspan  y="0" class="t0">ay
+</tspan>
+	</text>
+</svg>
