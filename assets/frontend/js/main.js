@@ -805,7 +805,7 @@ function showToast(message, type = "success") {
     }).showToast();
 }
 
-function calculateBookingDays(checkIn, checkOut) {
+function calculateBookingDays(checkIn, checkOut, checkOutTime) {
   const start = new Date(checkIn);
   const end = new Date(checkOut);
 
@@ -819,10 +819,12 @@ function calculateBookingDays(checkIn, checkOut) {
 
   let days = Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
 
-  // Checkout after 10:00 AM?
+  // Checkout after branch checkout time?
   const checkoutMinutes = end.getHours() * 60 + end.getMinutes();
+  const branchCheckout = checkOutTime.split(':').map(Number);
+  const branchCheckoutMinutes = branchCheckout[0] * 60 + branchCheckout[1];
 
-  if (checkoutMinutes > (10 * 60)) {
+  if (checkoutMinutes > branchCheckoutMinutes) {
       days++;
   }
 

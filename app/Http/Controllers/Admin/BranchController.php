@@ -114,7 +114,11 @@ class BranchController extends Controller
     // Store Branch
     public function storeOrUpdate(Request $request)
     {
-        $isUpdate = $request->BranchEditId;
+        $isUpdate = $request->branchEditId;
+
+        // print_r($request->all()); // Debugging line
+        // print_r("Is Update: " . $isUpdate); // Debugging line
+        // exit;
         
 
         if ($isUpdate && ! auth()->user()->can('branch.edit')) {
@@ -144,6 +148,8 @@ class BranchController extends Controller
                 'location' => $request->location,
                 'pincode' => $request->pincode,
                 'reception_number' => $request->reception_number,
+                'check_in_time' => $request->check_in_time ?? '13:00',
+                'check_out_time' => $request->check_out_time ?? '10:00',
                 'amenities' => $request->amenities ?? [],
                 'house_rules' => $request->house_rules
             ]);
@@ -159,6 +165,8 @@ class BranchController extends Controller
                 'location' => $request->location,
                 'pincode' => $request->pincode,
                 'reception_number' => $request->reception_number,
+                'check_in_time' => $request->check_in_time ?? '13:00',
+                'check_out_time' => $request->check_out_time ?? '10:00',
                 'amenities' => $request->amenities ?? [],
                 'house_rules' => $request->house_rules
             ]);

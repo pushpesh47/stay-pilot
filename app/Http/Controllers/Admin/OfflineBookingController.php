@@ -379,7 +379,7 @@ class OfflineBookingController extends Controller
         
         // calculate from database
         // $guestCount = (int) count($request->guest['name']);
-        // $daysCount = (int) calculateBookingDays($request->check_in, $request->check_out);
+        // $daysCount = (int) calculateBookingDays($request->check_in, $request->check_out, $property->branch->check_out_time);
         // $perDayPrice = (float) $property->base_price;
         // $extraGuestCharge = (float) (max(0, $guestCount - $property->default_guests) * $property->extra_guest_charge * $daysCount);
         

@@ -15,7 +15,7 @@ function numberToWords($number)
     return ucwords($f->format($number));
 }
 
-function calculateBookingDays($checkIn, $checkOut)
+function calculateBookingDays($checkIn, $checkOut, $checkOutTime)
 {
     $start = Carbon::parse($checkIn);
     $end = Carbon::parse($checkOut);
@@ -29,10 +29,12 @@ function calculateBookingDays($checkIn, $checkOut)
         $end->copy()->startOfDay()
     );
 
-    // Checkout after 10:00 AM?
+    // Checkout after branch checkout time?
+    $checkout = Carbon::parse($checkOutTime);
     $checkoutMinutes = ($end->hour * 60) + $end->minute;
+    $branchCheckoutMinutes = ($checkout->hour * 60) + $checkout->minute;
 
-    if ($checkoutMinutes > (10 * 60)) {
+    if ($checkoutMinutes > $branchCheckoutMinutes) {
         $days++;
     }
 

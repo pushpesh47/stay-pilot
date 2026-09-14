@@ -226,8 +226,8 @@
                                     <li>
                                         <i class="fa-regular fa-clock"></i>
                                         <span>
-                                            <strong>Check-in:</strong> 1:00 PM 
-                                            <strong>Check-out:</strong> 10:00 AM
+                                            <strong>Check-in:</strong> {{ \Carbon\Carbon::parse($property->branch->check_in_time)->format('g:i A') }}
+                                            <strong>Check-out:</strong> {{ \Carbon\Carbon::parse($property->branch->check_out_time)->format('g:i A') }}
                                         </span>
                                     </li>
 
@@ -288,7 +288,7 @@
                                             Since there are multiple unmanned entry and exit points,
                                             the stay must be fully prepaid.
                                             Guests wishing to extend their stay must complete the payment
-                                            before <strong>10:00 AM</strong> to avoid electricity
+                                            before <strong>{{ \Carbon\Carbon::parse($property->branch->check_out_time)->format('g:i A') }}</strong> to avoid electricity
                                             disconnection and automatic checkout.
                                         </p>
                                     </div>
@@ -357,6 +357,8 @@
     <script>
         let checkInPicker;
         let checkOutPicker;
+        let branchCheckInTime = "{{ $property->branch->check_in_time }}";
+        let branchCheckOutTime = "{{ $property->branch->check_out_time }}";
 
         $("#bookNow").prop('disabled',true);
         $("#extraChargeDiv").hide();
@@ -381,19 +383,23 @@
             enableTime: true,
             dateFormat: "Y-m-d H:i",
             minDate: "today",
-            defaultHour: 13,
-            defaultMinute: 0,
+            defaultHour: parseInt(branchCheckInTime.split(':')[0]),
+            defaultMinute: parseInt(branchCheckInTime.split(':')[1]),
 
             onChange: function(selectedDates) {
                 if (!selectedDates.length) {
                     return;
                 }
                 let checkInDate = selectedDates[0];
+                let [checkInHour, checkInMinute] = branchCheckInTime.split(':').map(Number);
 
-                if (checkInDate.getHours() < 13) {
+                if (
+                    checkInDate.getHours() < checkInHour ||
+                    (checkInDate.getHours() === checkInHour && checkInDate.getMinutes() < checkInMinute)
+                ) {
 
-                    checkInDate.setHours(13);
-                    checkInDate.setMinutes(0);
+                    checkInDate.setHours(checkInHour);
+                    checkInDate.setMinutes(checkInMinute);
 
                     checkInPicker.setDate(
                         checkInDate,
@@ -419,8 +425,8 @@
             enableTime: true,
             dateFormat: "Y-m-d H:i",
             minDate: "today",
-            defaultHour: 10,
-            defaultMinute: 0,
+            defaultHour: parseInt(branchCheckOutTime.split(':')[0]),
+            defaultMinute: parseInt(branchCheckOutTime.split(':')[1]),
 
             onChange: function(selectedDates) {
                 checkPropertyAvailability();
@@ -512,7 +518,7 @@
             let extraGuestCharge = "{{$property->extra_guest_charge}}";
             let guestCount = $("#guestCount").val();
             let extraAmount = 0;
-            let daysCount = calculateBookingDays(checkIn, checkOut);
+            let daysCount = calculateBookingDays(checkIn, checkOut, branchCheckOutTime);
             $('#daysCount').val(daysCount);
 
             let totalCost = {{$property->base_price}} * daysCount;

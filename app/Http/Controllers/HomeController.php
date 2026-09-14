@@ -45,10 +45,10 @@ class HomeController extends Controller
     public function propertyDetails(Request $request, $id){
         $data['title'] = "Property Details";
         $propertyId = decrypt($id);
-        $data['checkIn']  = now()->setTime(13, 0, 0); // Today 1:00 PM
-        $data['checkOut'] = now()->addDay()->setTime(10, 0, 0); // Tomorrow 10:00 AM
         $data['branches'] = Branch::with(['images','properties.images','city'])->where('status','active')->get();
         $data['property'] = Property::with(['propertyType', 'branch.city', 'images'])->findOrFail($propertyId);
+        $data['checkIn']  = now()->setTimeFromTimeString($data['property']->branch->check_in_time);
+        $data['checkOut'] = now()->addDay()->setTimeFromTimeString($data['property']->branch->check_out_time);
         // echo "<pre>";
         // print_r($data['property']->toArray());
         // exit;
@@ -177,7 +177,7 @@ class HomeController extends Controller
             );
             $property = Property::findOrFail($propertyId);
 
-            $daysCount = calculateBookingDays($request->check_in, $request->check_out);
+            $daysCount = calculateBookingDays($request->check_in, $request->check_out, $property->branch->check_out_time);
             $guestCount = (int) $request->guest_count;
             $baseAmount = $property->base_price * $daysCount;
             $extraCharge = max(0, $guestCount - $property->default_guests) * $property->extra_guest_charge * $daysCount;
@@ -267,7 +267,7 @@ class HomeController extends Controller
         $property = Property::findOrFail($propertyId);
 
 
-        $daysCount = calculateBookingDays($request->check_in, $request->check_out);
+        $daysCount = calculateBookingDays($request->check_in, $request->check_out, $property->branch->check_out_time);
         $guestCount = (int) $request->guest_count;
         $baseAmount = $property->base_price * $daysCount;
         $extraCharge = max(0, $guestCount - $property->default_guests) * $property->extra_guest_charge * $daysCount;
@@ -388,7 +388,7 @@ class HomeController extends Controller
 
             $property = Property::findOrFail($propertyId);
             
-            $daysCount = calculateBookingDays($request->check_in, $request->check_out);
+            $daysCount = calculateBookingDays($request->check_in, $request->check_out, $property->branch->check_out_time);
             $guestCount = (int) $request->guest_count;
             $baseAmount = $property->base_price * $daysCount;
             $extraCharge = max(0, $guestCount - $property->default_guests) * $property->extra_guest_charge * $daysCount;

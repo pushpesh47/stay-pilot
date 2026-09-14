@@ -72,6 +72,22 @@
                     name: 'pincode',
                     title: 'Pincode'
                 },
+                {
+                    data: 'check_in_time',
+                    name: 'check_in_time',
+                    title: 'Check In Time',
+                    render: function (data) {
+                        return data ? data.substring(0, 5) : '';
+                    }
+                },
+                {
+                    data: 'check_out_time',
+                    name: 'check_out_time',
+                    title: 'Check Out Time',
+                    render: function (data) {
+                        return data ? data.substring(0, 5) : '';
+                    }
+                },
 
                 {
                     data: 'created_at',

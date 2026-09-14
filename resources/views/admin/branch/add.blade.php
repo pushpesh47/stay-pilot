@@ -50,16 +50,30 @@
                                 </div>
                             </div>
                             {{-- Pincode --}}
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label>Pincode *</label>
                                 <input type="text" name="pincode" class="form-control"
                                     value="{{ old('pincode', $branch->pincode ?? '') }}" required>
                             </div>
                             {{-- Reception Phone Number --}}
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <label>Reception Phone Number</label>
                                 <input type="text" name="reception_number" class="form-control"
                                     value="{{ old('reception_number', $branch->reception_number ?? '') }}">
+                            </div>
+
+                            {{-- Check In Time --}}
+                            <div class="col-lg-3">
+                                <label>Check In Time</label>
+                                <input type="text" name="check_in_time" class="form-control" id="checkInTime"
+                                    value="{{ old('check_in_time', $branch->check_in_time ?? '13:00') }}">
+                            </div>
+
+                            {{-- Check Out Time --}}
+                            <div class="col-lg-3">
+                                <label>Reception Check Out Time</label>
+                                <input type="text" name="check_out_time" class="form-control" id="checkOutTime"
+                                    value="{{ old('check_out_time', $branch->check_out_time ?? '10:00') }}">
                             </div>
 
                             <div class="col-lg-12 mb-4">
@@ -172,4 +186,26 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    let checkInPicker = null;
+    let checkOutPicker = null;
+    $(document).ready(function () {
+        checkInPicker = flatpickr("#checkInTime", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+        });
+        checkOutPicker = flatpickr("#checkOutTime", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+        });
+    });
+</script>
 @endsection

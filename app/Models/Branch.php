@@ -10,7 +10,7 @@ class Branch extends Model
     use HasFactory, SoftDeletes ;
 
     protected $fillable = [
-        'name','description','short_description','city_id','location','pincode','reception_number','amenities','house_rules','status'
+        'name','description','short_description','city_id','location','pincode','reception_number','check_in_time','check_out_time','amenities','house_rules','status'
     ];
 
     protected $casts = [
