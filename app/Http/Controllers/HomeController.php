@@ -172,8 +172,8 @@ class HomeController extends Controller
             ]);
         }else{
             $razorpay = new Razorpay(
-                config('razorpay.key'),
-                config('razorpay.secret')
+                setting_value('razorpay_key'),
+                setting_value('razorpay_secret')
             );
             $property = Property::findOrFail($propertyId);
 
@@ -209,7 +209,7 @@ class HomeController extends Controller
                 'amount' => $amount,
                 'extra_charge' => $extraCharge,
                 'razorpay' => [
-                    'key' => config('razorpay.key'),
+                    'key' => setting_value('razorpay_key'),
                     'order_id' => $order['id'],
                     'amount' => $amount * 100,
                     'name' => 'ZuzuStay',
@@ -261,8 +261,8 @@ class HomeController extends Controller
 
         
         $razorpay = new Razorpay(
-            config('razorpay.key'),
-            config('razorpay.secret')
+            setting_value('razorpay_key'),
+            setting_value('razorpay_secret')
         );
         $property = Property::findOrFail($propertyId);
 
@@ -299,7 +299,7 @@ class HomeController extends Controller
             'base_price' => $baseAmount,
             'total_cost' => $amount,
             'razorpay' => [
-                'key' => config('razorpay.key'),
+                'key' => setting_value('razorpay_key'),
                 'order_id' => $order['id'],
                 'amount' => $amount * 100,
                 'name' => 'ZuzuStay',
@@ -342,7 +342,7 @@ class HomeController extends Controller
 
         try {
 
-            $razorpay = new Razorpay(config('razorpay.key'), config('razorpay.secret'));            
+            $razorpay = new Razorpay(setting_value('razorpay_key'), setting_value('razorpay_secret'));            
             $razorpay->utility->verifyPaymentSignature([
                 'razorpay_order_id' => $request->razorpay_order_id,
                 'razorpay_payment_id' => $request->razorpay_payment_id,
