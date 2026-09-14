@@ -361,6 +361,23 @@ class BranchController extends Controller
         }
     }
 
+    public function getBranchesCityWise(Request $request)
+    {
+        $request->validate([
+            'city' => 'required|exists:cities,id',
+        ]);
+
+        $city  = $request->city;
+
+        $branches = Branch::where('city_id', $request->city)
+            ->where('status','active')->orderBy('name', 'ASC')->get();
+
+        return response()->json([
+            'success' => true,
+            'branches' => $branches
+        ]);
+    }
+
     public function getBranchEmptyProperties(Request $request)
     {
         $checkIn  = Carbon::parse($request->check_in)->format('Y-m-d H:i:s');

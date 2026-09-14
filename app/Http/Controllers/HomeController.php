@@ -37,10 +37,32 @@ class HomeController extends Controller
     }
 
     public function properties(Request $request){
+        
+        if(!empty($request->search_city)){
+            $data['search']['city'] = $request->search_city;
+            $data['search']['branches'] = Branch::where('city_id', $data['search']['city'])
+                ->where('status','active')->orderBy('name', 'ASC')->get();
+        }
+        if(!empty($request->search_checkin)){
+            $data['search']['checkin'] = $request->search_checkin;
+        }
+        if(!empty($request->search_checkout)){
+            $data['search']['checkout'] = $request->search_checkout;
+        }
+        if(!empty($request->search_branch)){
+            $data['search']['selected_branch'] = Branch::with(['images','properties.images','city'])->find($request->search_branch);
+        }
+        if(!empty($request->search_guests)){
+            $data['search']['guest'] = $request->search_guests;
+        }
+
         $data['title'] = "Properties";
         $data['branches'] = Branch::with(['images','properties.images','city'])->where('status','active')->get();
+
+
         return view('frontend.properties', $data);
     }
+    
 
     public function propertyDetails(Request $request, $id){
         $data['title'] = "Property Details";

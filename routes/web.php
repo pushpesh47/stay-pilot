@@ -160,6 +160,10 @@ Route::middleware(['web'])->name('frontend.')->group(function () {
     Route::post('/guest-booking-information', [HomeController::class, 'guestBookingInformation'])->name('guestBookingInformation');
     
 
+    Route::post('/get-branches-city-wise', [BranchController::class, 'getBranchesCityWise'])->name('getBranchesCityWise');
+    Route::get('/search', [HomeController::class, 'properties'])->name('search.properties');
+    
+
 
     Route::post('verify-payment-and-book', [HomeController::class, 'verifyPaymentAndBook'])->name('verifyPaymentAndBook')->withoutMiddleware([ValidateCsrfToken::class]);;
     Route::post('update-failed-payment-status', [HomeController::class, 'updateFailedPaymentStatus'])->name('updateFailedPaymentStatus')->withoutMiddleware([ValidateCsrfToken::class]);;

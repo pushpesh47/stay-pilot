@@ -96,6 +96,116 @@
     const isLoggedIn = @json(auth()->check());
 </script>
 
+<script>
+    $(document).ready(function(){
+        let searchCheckInPicker = null;
+        let searchCheckOutPicker = null;
+        let appUrl = $('meta[name="base-url"]').attr("content");
+
+        $(document).on('change', '#search_city', function () {
+            let cityId = $(this).val();
+
+            $.ajax({
+                url: appUrl + '/get-branches-city-wise',
+                type: 'POST',
+                data: {
+                    city: cityId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response);
+                    let options = '<option value="">Branch</option>';
+
+                    if (response.success && response.branches.length > 0) {
+                        console.log("branches fetched");
+                        $.each(response.branches, function (index, branch) {
+                            options += `
+                                <option value="${branch.id}" >
+                                    ${branch.name} (${branch.location})
+                                </option>
+                            `;
+                        });
+
+                    } else {
+                        options += '<option value="">No Branches Found</option>';
+                    }
+
+                    $('#search_branch').html(options);
+                    $('#search_branch').niceSelect('update');
+                },
+                error: function () {
+                    
+                }
+            });
+        });
+
+        searchCheckOutPicker = flatpickr("#search_checkout", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+
+        searchCheckInPicker = flatpickr("#search_checkin", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+
+            onChange: function (selectedDates) {
+
+                if (!selectedDates.length) {
+                    return;
+                }
+
+                let checkInDate = selectedDates[0];
+
+                // Checkout must be after Check In
+                searchCheckOutPicker.set("minDate", checkInDate);
+
+                // Clear invalid checkout
+                let currentCheckout = searchCheckOutPicker.selectedDates[0];
+
+                if (
+                    currentCheckout &&
+                    searchCheckOutPicker <= checkInDate
+                ) {
+                    searchCheckOutPicker.clear();
+                }
+            }
+        });
+
+        // Apply Check In restriction when values are already loaded
+        if (searchCheckInPicker.selectedDates.length) {
+            searchCheckOutPicker.set(
+                "minDate",
+                searchCheckInPicker.selectedDates[0]
+            );
+        }
+
+
+        $('#property_search_form').on('submit', function (e) {
+
+            if (!$('#search_city').val()) {
+                e.preventDefault();
+                showToast("Please Select City", "warning");
+                return;
+            }
+
+            if (!$('#search_checkin').val()) {
+                e.preventDefault();
+                showToast("Please Select Check In Date", "warning");
+                return;
+            }
+
+            if (!$('#search_checkout').val()) {
+                e.preventDefault();
+                showToast("Please Select Check Out Date", "warning");
+                return;
+            }
+
+        });
+
+
+    });
+</script>
+
 @yield('scripts')
 </body>
 </html>

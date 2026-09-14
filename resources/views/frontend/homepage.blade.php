@@ -6,7 +6,7 @@
         <div class="bg-color"></div>
         <div class="container">
             <!-- search box -->
-            @includeIf('frontend.layouts.room-search', ['context' => 'homepage'])
+            @includeIf('frontend.layouts.property-search', ['context' => 'homepage'])
             <div class="row">
                 <div class="col-lg-6 first-p-0">
                     <div class="banner__content1">

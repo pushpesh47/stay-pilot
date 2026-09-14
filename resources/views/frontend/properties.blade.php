@@ -10,13 +10,13 @@
                 <div class="col-12">
                     <div class="breadcrumb__content">
                         <div class="breadcrumb__title-wrapper mb-15 mb-sm-10 mb-xs-5">
-                            <h1 class="breadcrumb__title color-white wow fadeInLeft animated" data-wow-delay=".2s">Room</h1>
+                            <h1 class="breadcrumb__title color-white wow fadeInLeft animated" data-wow-delay=".2s">Properties</h1>
                         </div>
                         <div class="breadcrumb__menu wow fadeInLeft animated" data-wow-delay=".4s">
                             <nav>
                                 <ul>
                                     <li><span><a href="{{url('/')}}">Home</a></span></li>
-                                    <li class="active"><span>Room</span></li>
+                                    <li class="active"><span>Properties</span></li>
                                 </ul>
                             </nav>
                         </div>
@@ -31,11 +31,20 @@
         <div class="container">
             <div class="row">
                 <div class="room__cheek-box" style="border:none;">
-                    @includeIf('frontend.layouts.room-search', ['context' => 'properties'])
+                    @includeIf('frontend.layouts.property-search', ['context' => 'properties'])
                 </div>
             </div>
             <div class="row mb-minus-30">
-                @foreach($branches as $branch)
+                @php
+                    $showBranches = $branches;
+                    if(!empty($search['selected_branch'])){
+                        $showBranches = collect([$search['selected_branch']]);
+                    } elseif(!empty($search['branches'])){
+                        $showBranches = $search['branches'];
+                    }
+                @endphp
+
+                @foreach($showBranches as $branch)
                                         
                     @foreach($branch->properties as $property)
                         @php
@@ -45,8 +54,13 @@
                             <div class="accomodation__item mb-30">
                                 <div class="accomodation__thumb">
                                     @php
-                                        $checkIn  = now()->setTime(13, 0, 0); // Today 1:00 PM
-                                        $checkOut = now()->addDay()->setTime(10, 0, 0); // Tomorrow 10:00 AM
+                                        $checkIn = !empty($search['checkin'])
+                                            ? \Carbon\Carbon::parse($search['checkin'])
+                                            : now()->setTime(13, 0, 0);
+
+                                        $checkOut = !empty($search['checkout'])
+                                            ? \Carbon\Carbon::parse($search['checkout'])
+                                            : now()->addDay()->setTime(10, 0, 0);
                                     @endphp
                                     @if($property->isPropertyBooked($checkIn, $checkOut))
                                         <div class="property-status property-status-booked">

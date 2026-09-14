@@ -12510,8 +12510,7 @@ body .ui-tooltip {
   padding: 50px 0;
 }
 .room__cheek-box-3 {
-  max-width: 922px;
-  width: 100%;
+  width: auto;
   background: rgba(255, 255, 255, 0.7);
   margin-bottom: 0;
   position: absolute;
@@ -12525,6 +12524,11 @@ body .ui-tooltip {
   padding: 30px;
   border-radius: 30px;
 }
+
+.room__cheek-box-3 > form {
+  display: contents;
+}
+
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .room__cheek-box-3 {
     left: 15px;
@@ -12580,8 +12584,8 @@ body .ui-tooltip {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border: 1px solid #E7E7EB;
 }
 .room__cheek-box-item-icon-2 {
@@ -12619,7 +12623,7 @@ body .ui-tooltip {
   font-size: 15px;
 }
 .room__cheek-box-item .room-seclect .input-datepicker input {
-  max-width: 95px;
+  max-width: 130px;
   margin-left: 0;
   border: none;
 }
@@ -12748,6 +12752,17 @@ body .ui-tooltip {
   z-index: 9;
   width: 100%;
 }
+
+.room__cheek-box-3 .nice-select .list {
+    min-width: 100%;
+    width: max-content;
+    transform: scale(1) translateY(0);
+}
+
+.room__cheek-box-3 .nice-select .list li{
+    padding-right: 10px;;
+}
+
 .room__cheek-box-item .nice-select .option {
   cursor: pointer;
   font-weight: 400;
